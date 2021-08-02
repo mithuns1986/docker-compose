@@ -11,3 +11,15 @@ docker run -d --name=vote -p 5000:80 voting-app
 docker run -d --name=result -p 5001:81 result-app
 
 docker run -d --name=worker worker
+
+#NOW We need to link all these applications to gether in order to work.
+
+docker run -d --name=redis redis
+
+docker run -d --name=db postgres:9.4
+
+docker run -d --name=vote -p 5000:80 --links redis:redis voting-app
+
+docker run -d --name=result -p 5001:81 --links db:db result-app
+
+docker run -d --name=worker --links redis:redis worker 
