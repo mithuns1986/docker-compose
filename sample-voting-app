@@ -1,0 +1,13 @@
+Docker Sample Voting app is a distributed application which uses a Postgres database and Redis message queue, with application components running in Python, .NET and Node.js containers. All the components of the app are published in public images on Docker Hub.
+Voting app
+In this lab you’ll learn how to set up a sample voting app using Docker Compose. You’ll gain experience of working with Docker Compose.
+
+docker run -d --name=redis redis
+
+docker run -d --name=db postgres:9.4
+
+docker run -d --name=vote -p 5000:80 voting-app
+
+docker run -d --name=result -p 5001:81 result-app
+
+docker run -d --name=worker worker
